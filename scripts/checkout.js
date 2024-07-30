@@ -1,16 +1,18 @@
-import {cart, delete_from_cart} from '../data/cart.js';
+import {cart, removeFromCart} from '../data/cart.js';
 import {products}from'../data/products.js';
 import {formatCurrency} from './utils/money.js';
 
 let cartHTML='';
 
 cart.forEach((cartItem) => {
-    const productId = cartItem.productID;
+  
+    const productId = cartItem.productId;
   
     let matchingProduct;
   
     products.forEach((product) => {
-      if (product.id === productId) {
+      console.log(product.id,productId);
+      if (product.id == productId) {
         matchingProduct = product;
       }
     });
@@ -100,9 +102,11 @@ document.querySelectorAll('.js-item-delete')
     .forEach((link)=>{
         link.addEventListener('click',()=>{
           const productId=link.dataset.productId;
-          delete_from_cart(productId);
-          const container=document.querySelector(`.js-cart-item-container-${productId}`);
-    
+          removeFromCart(productId);
+          
+          const container = document.querySelector(
+            `.js-cart-item-container-${productId}`
+          );
           container.remove();
         });
     });
