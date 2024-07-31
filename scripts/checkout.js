@@ -3,11 +3,11 @@ import { deliveryOptions } from '../data/deliveryOptions.js';
 import {products}from'../data/products.js';
 import {formatCurrency} from './utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-let cartHTML='';
+
 const today=dayjs();
-
-
-cart.forEach((cartItem) => {
+function renderOrderSummary(){
+  let cartHTML='';
+  cart.forEach((cartItem) => {
   
     const productId = cartItem.productId;
 
@@ -34,6 +34,9 @@ cart.forEach((cartItem) => {
     let deliveryDate=today.add(matchingOption.deliveryDays,'days');
 
     deliveryDate=deliveryDate.format('dddd, MMMM D');
+    function renderOrderSummary(){
+      
+    }
 
     const html=`<div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
             <div class="delivery-date">
@@ -128,6 +131,10 @@ document.querySelectorAll('.js-delivery-option')
 
         const {productId, deliveryOptionId} = element.dataset;
         updateDeliveryOption(productId, deliveryOptionId);
-        console.log(cart);
+        renderOrderSummary();
       });
     });
+   
+}
+
+renderOrderSummary();
